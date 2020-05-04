@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const HelloWorld = require('./routes/routes');
+const router = require('./app/routes/routes');
 
-app.use(HelloWorld)
+app.use('/', router);
 
 app.listen(3000);

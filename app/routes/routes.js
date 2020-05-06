@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const db = require('../db');
+
 const router = express.Router();
 
 router.use(bodyParser.json());
@@ -8,36 +10,17 @@ router.use(bodyParser.urlencoded( {extended: true} ));
 
 module.exports = router;
 
-const fruits = [
-  {
-    id: 1,
-    name: "banana"
-  },
-  {
-    id: 2,
-    name: "orange"
-  },
-  {
-    id: 3,
-    name: "Grapefruit"
-  }
-];
-
-router.get('/', (req, res) => res.send('Hello World'));
-
-router.get('/fruits', (req, res) => res.send(fruits));
-
-router.get('/fruits/:id', (req, res) => {
-  const obj = fruits.find(item => item.id === Number(req.params.id) && item);
-
-  res.send(obj.name)
+router.get('/', (req, res) => {
+  // db.get().collection('fruits').find().toArray((err, list) => {
+  //   if (err) res.sendStatus(500);
+  //   else res.send(list)
+  // })
 });
 
 router.post('/fruits', (req, res) => {
-  const newFruit = {
-    id: fruits.length + 1,
-    name: req.body.name
-  }
-  fruits.push(newFruit);
-  res.send(fruits);
-})
+  const newFruit = { name: req.body.name };
+  db.get().collection('fruits').insert(newFruit, (err, list) => {
+    if (err) res.sendStatus(500);
+    else res.send(newFruit);
+  })
+});

@@ -5,17 +5,15 @@ const state = {
 }
 
 exports.connect = (url, done) => {
-  if (state.db) return done();
+  if (state.db) done()
+  else {
+    MongoClient.connect(url, (err, client) => {
+      if (err) done(err);
 
-  else MongoClient.connect(url, (err, db) => {
-    if (err) return done(err);
-
-    state.db = db;
-    console.log(state.db.collection('fruits'), 'state.db');
-    done();
-  })
+      state.db = client.db('firstdb');
+      done();
+    })
+  }
 }
 
-exports.get = function () {
-  return state.db
-};
+exports.get = () => state.db;

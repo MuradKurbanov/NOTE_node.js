@@ -1,3 +1,5 @@
 # programming-memo_server
 
-start: "run nodemon"
+start node: "run nodemon"
+
+start mongodb: mongod

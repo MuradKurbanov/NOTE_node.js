@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const db = require('../db');
-const fruitController = require('../controllers/fruits');
+const technologiesController = require('../controllers/technologiesController');
+const themesController = require('../controllers/themesController');
 
 const router = express.Router();
 
@@ -11,8 +11,23 @@ router.use(bodyParser.urlencoded( {extended: true} ));
 
 module.exports = router;
 
-router.get('/fruits', fruitController.all);
+// Technologies
+router.get('/technologies', technologiesController.all);
 
-router.get('/fruits/:id', fruitController.fingById);
+router.get('/technologies/:id', technologiesController.fingById);
 
-router.post('/fruits', fruitController.create);
+router.post('/technologies', technologiesController.create);
+
+router.delete('/technologies/:id', technologiesController.delete);
+
+// Themes
+router.get('/themes', themesController.all);
+
+router.get('/themes/:id', themesController.fingById);
+
+router.post('/themes', themesController.create);
+
+router.delete('/themes/:id', themesController.delete);
+
+router.delete('/themes', themesController.deleteAll);
+

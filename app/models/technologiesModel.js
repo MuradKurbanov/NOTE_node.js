@@ -12,4 +12,7 @@ exports.findById = (id, cb) => {
 exports.create = (fruit, cb) => {
   db.get().collection('fruits').insert(fruit, (err, list) => cb(err, list))
 };
- 
+
+exports.delete = (id, cb) => {
+  db.get().collection('fruits').deleteOne({'_id': ObjectID(id)}, (err, list) => cb(err, list))
+};

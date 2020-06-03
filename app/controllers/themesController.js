@@ -1,5 +1,13 @@
 const ThemesController = require('../models/themesModel');
-const ObjectId = require('mongodb').ObjectId;
+
+// const subThemes = [
+//   {
+//     subThemeId: ObjectId(),
+//     title: req.body.theme.subThemes[0].title,
+//     description: req.body.theme.subThemes[0].description,
+//     example: req.body.theme.subThemes[0].example
+//   }
+// ]
 
 exports.all = (req, res) => {
   ThemesController.all((err, list) => {
@@ -16,20 +24,13 @@ exports.fingById = (req, res) => {
 };
 
 exports.create = (req, res) => {
+  const { name  } = req.body;
   const newFruit = {
-    name: req.body.name,
+    name,
     theme: {
       title: req.body.theme.title,
       description: req.body.theme.description,
       example: req.body.theme.example,
-      subThemes: [
-        {
-          subThemeId: ObjectId(),
-          title: req.body.theme.subThemes[0].title,
-          description: req.body.theme.subThemes[0].description,
-          example: req.body.theme.subThemes[0].example
-        }
-      ]
     }
   };
   ThemesController.create(newFruit, (err) => {

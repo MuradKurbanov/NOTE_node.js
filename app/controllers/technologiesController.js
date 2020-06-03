@@ -15,10 +15,10 @@ exports.fingById = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  const newFruit = { name: req.body.name };
-  TechnologiesController.create(newFruit, (err, list) => {
+  const { name, description } = req.body;
+  TechnologiesController.create({ name, description }, err => {
     if (err) res.sendStatus(500);
-    else res.send(newFruit);
+    else res.send({ name, description });
   })
 };
 

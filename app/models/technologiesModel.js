@@ -1,18 +1,27 @@
 const db = require('../db');
 const ObjectID = require('mongodb').ObjectID;
 
-exports.all = (cb) => {
-  db.get().collection('technologies').find().toArray((err, list) => cb(err, list))
+const checkResponse = (res, err, data) => {
+  if (err) res.sendStatus(500);
+  else res.send(data)
 };
 
-exports.findById = (id, cb) => {
-  db.get().collection('technologies').findOne({'_id': ObjectID(id)}, (err, list) => cb(err, list))
+exports.all = (res) => {
+  db.get().collection('technologies').find().toArray((err, list) => checkResponse(res, err, list))
 };
 
-exports.create = (fruit, cb) => {
-  db.get().collection('technologies').insert(fruit, (err, list) => cb(err, list))
+exports.findOne = (id, res) => {
+  db.get().collection('technologies').findOne({'_id': ObjectID(id)}, (err, list) => checkResponse(res, err, list))
 };
 
-exports.delete = (id, cb) => {
-  db.get().collection('technologies').deleteOne({'_id': ObjectID(id)}, (err, list) => cb(err, list))
+exports.create = (technology, res) => {
+  db.get().collection('technologies').insert(technology, (err, list) => checkResponse(res, err, list))
+};
+
+exports.delete = (id, res) => {
+  db.get().collection('technologies').deleteOne({'_id': ObjectID(id)}, (err, list) => checkResponse(res, err, list))
+};
+
+exports.deleteAll = res => {
+  db.get().collection('technologies').deleteMany({}, (err, list) => checkResponse(res, err, list))
 };

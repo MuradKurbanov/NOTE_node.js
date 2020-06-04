@@ -1,31 +1,27 @@
 const TechnologiesController = require('../models/technologiesModel');
+const ThemesController = require('../models/themesModel');
 
 exports.all = (req, res) => {
-  TechnologiesController.all((err, list) => {
-    if (err) res.sendStatus(500);
-    else res.send(list)
-  })
+  TechnologiesController.all(res)
 };
 
-exports.fingById = (req, res) => {
-  TechnologiesController.findById(req.params.id, (err, list) => {
-    if (err) res.sendStatus(500);
-    else res.send(list)
-  })
+exports.allThemesByTechnology = (req, res) => {
+  ThemesController.allThemesByTechnology(req.body._id, res)
+};
+
+exports.findOne = (req, res) => {
+  TechnologiesController.findOne(req.params.id, res)
 };
 
 exports.create = (req, res) => {
   const { name, description } = req.body;
-  TechnologiesController.create({ name, description }, err => {
-    if (err) res.sendStatus(500);
-    else res.send({ name, description });
-  })
+  TechnologiesController.create({ name, description }, res)
 };
 
 exports.delete = (req, res) => {
-  TechnologiesController.delete(req.params.id, (err, list) => {
-    if (err) res.sendStatus(500);
-    else res.send(list)
-  })
+  TechnologiesController.delete(req.params.id, res)
 };
- 
+
+exports.deleteAll = (req, res) => {
+  TechnologiesController.deleteAll(res)
+};

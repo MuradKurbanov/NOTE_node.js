@@ -10,46 +10,30 @@ const ThemesController = require('../models/themesModel');
 // ]
 
 exports.all = (req, res) => {
-  ThemesController.all((err, list) => {
-    if (err) res.sendStatus(500);
-    else res.send(list)
-  })
+  ThemesController.all(res)
 };
 
 exports.fingById = (req, res) => {
-  ThemesController.findById(req.params.id, (err, list) => {
-    if (err) res.sendStatus(500);
-    else res.send(list)
-  })
+  ThemesController.findById(req.params.id, res)
 };
 
 exports.create = (req, res) => {
-  const { name  } = req.body;
-  const newFruit = {
-    name,
+  ThemesController.create({
+    name: req.body.name,
+    technology: req.body.technology,
     theme: {
       title: req.body.theme.title,
       description: req.body.theme.description,
       example: req.body.theme.example,
     }
-  };
-  ThemesController.create(newFruit, (err) => {
-    if (err) res.sendStatus(500);
-    else res.send(newFruit);
-  })
+  }, res)
 };
 
 exports.delete = (req, res) => {
-  ThemesController.delete(req.params.id, (err, list) => {
-    if (err) res.sendStatus(500);
-    else res.send(list)
-  })
+  ThemesController.delete(req.params.id, res)
 };
 
 exports.deleteAll = (req, res) => {
-  ThemesController.deleteAll((err, list) => {
-    if (err) res.sendStatus(500);
-    else res.send(list)
-  })
+  ThemesController.deleteAll(res)
 };
 

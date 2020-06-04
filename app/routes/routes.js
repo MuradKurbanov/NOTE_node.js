@@ -14,11 +14,15 @@ module.exports = router;
 // Technologies
 router.get('/technologies', technologiesController.all);
 
-router.get('/technologies/:id', technologiesController.fingById);
+router.get('/technology/:id', technologiesController.allThemesByTechnology);
+
+router.get('/technologies/:id', technologiesController.findOne);
 
 router.post('/technologies', technologiesController.create);
 
 router.delete('/technologies/:id', technologiesController.delete);
+
+router.delete('/technologies', technologiesController.deleteAll);
 
 // Themes
 router.get('/themes', themesController.all);

@@ -6,26 +6,21 @@ const checkResponse = (res, err, data) => {
   else res.send(data)
 };
 
-exports.all = (res) => {
-  db.get().collection('themes').find().toArray((err, list) => checkResponse(res, err, list))
-};
-
-exports.allThemesByTechnology = (id, res) => {
-  db.get().collection('themes').findOne({'_id': ObjectID(id)}, (err, list) => checkResponse(res, err, list))
-};
-
-exports.findById = (id, res) => {
-  db.get().collection('themes').findOne({'_id': ObjectID(id)}, (err, list) => checkResponse(res, err, list))
-};
-
+// Create
 exports.create = (theme, res) => {
-  db.get().collection('themes').insertOne(theme, err => checkResponse(res, err, theme))
+  db.get().collection('themes').insertOne(theme, (err, list) => checkResponse(res, err, list))
 };
 
+// Read
+exports.find = (params, res) => {
+  console.log(params);
+  db.get().collection('themes').find(params).toArray((err, list) => checkResponse(res, err, list))
+};
+
+// Update
+// exports.update = (params)
+
+// Delete
 exports.delete = (id, res) => {
   db.get().collection('themes').deleteOne({'_id': ObjectID(id)}, (err, list) => checkResponse(res, err, list))
-};
-
-exports.deleteAll = res => {
-  db.get().collection('themes').deleteMany({}, (err, list) => checkResponse(res, err, list))
 };

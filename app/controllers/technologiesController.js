@@ -1,12 +1,7 @@
 const TechnologiesController = require('../models/technologiesModel');
-const ThemesController = require('../models/themesModel');
 
 exports.all = (req, res) => {
   TechnologiesController.all(res)
-};
-
-exports.allThemesByTechnology = (req, res) => {
-  ThemesController.allThemesByTechnology(req.body._id, res)
 };
 
 exports.findOne = (req, res) => {

@@ -15,7 +15,7 @@ exports.findOne = (id, res) => {
 };
 
 exports.create = (technology, res) => {
-  db.get().collection('technologies').insert(technology, (err, list) => checkResponse(res, err, list))
+  db.get().collection('technologies').insertOne(technology, (err, list) => checkResponse(res, err, list))
 };
 
 exports.delete = (id, res) => {

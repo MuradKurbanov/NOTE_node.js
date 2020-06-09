@@ -29,4 +29,6 @@ router.get('/themes/:id', themesController.find);
 
 router.post('/themes', themesController.create);
 
+router.put('/themes/:id', themesController.update);
+
 router.delete('/themes/:id', themesController.delete);

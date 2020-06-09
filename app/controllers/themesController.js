@@ -3,12 +3,9 @@ const ObjectID = require('mongodb').ObjectID;
 
 // Create new theme
 exports.create = (req, res) => {
-  ThemesController.create({
-    name: req.body.name,
-    technology: req.body.technology,
-    description: req.body.description,
-    example: req.body.example,
-  }, res)
+  const { name, description, example } = req.body;
+  const { idTechnology, nameTechnology } = req.body.technology;
+  ThemesController.create({ name, technology: { idTechnology, nameTechnology }, description, example }, res)
 };
 
 // Read - find all or by idTechnology
@@ -16,15 +13,17 @@ exports.find = (req, res) => {
   const { id } = req.params;
   ThemesController.find(id ? {'technology.idTechnology': id } : {}, res)
 };
-// { 'comments.2': { name: 'John' } }
 
 // Update by id theme
-// exports.update = (req, res) => {
-//   ThemesController.update({"_id": ObjectID(req.params.id)}, res)
-// };
+exports.update = (req, res) => {
+  const { name, description, example } = req.body;
+  const { id } = req.params;
+  ThemesController.update({ '_id': ObjectID(id) }, {name, description, example}, res)
+};
 
 // Delete by id theme
 exports.delete = (req, res) => {
-  ThemesController.delete(req.params.id, res)
+  const { id } = req.params;
+  ThemesController.delete({ '_id': ObjectID(id) }, res);
 };
 

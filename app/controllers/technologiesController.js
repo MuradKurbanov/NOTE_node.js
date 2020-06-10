@@ -1,22 +1,27 @@
 const TechnologiesController = require('../models/technologiesModel');
+const ObjectID = require('mongodb').ObjectID;
 
-exports.all = (req, res) => {
-  TechnologiesController.all(res)
-};
-
-exports.findOne = (req, res) => {
-  TechnologiesController.findOne(req.params.id, res)
-};
-
+// Creat
 exports.create = (req, res) => {
   const { name, description } = req.body;
   TechnologiesController.create({ name, description }, res)
 };
 
-exports.delete = (req, res) => {
-  TechnologiesController.delete(req.params.id, res)
+// Read
+exports.find = (req, res) => {
+  const { id } = req.params;
+  TechnologiesController.find(id ? {'_id': ObjectID(id) } : {}, res)
 };
 
-exports.deleteAll = (req, res) => {
-  TechnologiesController.deleteAll(res)
+// Update
+exports.update = (req, res) => {
+  const { name, description } = req.body;
+  const { id } = req.params;
+  TechnologiesController.update({ '_id': ObjectID(id) }, {name, description}, res)
+};
+
+//Delete
+exports.delete = (req, res) => {
+  const { id } = req.params;
+  TechnologiesController.delete({'_id': ObjectID(id)}, res)
 };

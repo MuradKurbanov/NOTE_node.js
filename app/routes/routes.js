@@ -12,15 +12,15 @@ router.use(bodyParser.urlencoded( {extended: true} ));
 module.exports = router;
 
 // Technologies
-router.get('/technologies', technologiesController.all);
+router.get('/technologies', technologiesController.find);
 
-router.get('/technologies/:id', technologiesController.findOne);
+router.get('/technologies/:id', technologiesController.find);
 
 router.post('/technologies', technologiesController.create);
 
-router.delete('/technologies/:id', technologiesController.delete);
+router.put('/technologies/:id', technologiesController.update);
 
-router.delete('/technologies', technologiesController.deleteAll);
+router.delete('/technologies/:id', technologiesController.delete);
 
 // Themes
 router.get('/themes', themesController.find);

@@ -10,6 +10,7 @@ exports.create = (req, res) => {
 // Read
 exports.find = (req, res) => {
   const { id } = req.params;
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
   TechnologiesController.find(id ? {'_id': ObjectID(id) } : {}, res)
 };
 

@@ -1,5 +1,5 @@
 # programming-memo_server
 
-start node: "run nodemon"
+local start node: nodemon or yarn start
 
-start mongodb: mongod
+local start mongodb: mongod

@@ -4,9 +4,11 @@ const db = require('./app/db');
 const router = require('./app/routes/routes');
 const dbUrl = require('./dbUrl');
 
+const PORT = process.env.PORT || 3001;
+
 const app = express();
 
 db.connect(dbUrl, err => {
   if (err) console.log(err);
-  else app.use('/', router).listen(3000);
+  else app.use('/', router).listen(PORT);
 });

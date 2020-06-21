@@ -5,3 +5,4 @@ npm-debug.log
 .DS_Store
 /dbUrl.js
 /.idea/
+/yarn.lock

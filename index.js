@@ -10,5 +10,8 @@ const app = express();
 
 db.connect(dbUrl, err => {
   if (err) console.log(err);
-  else app.use('/', router).listen(PORT);
+  else {
+    console.log('test_commit');
+    app.use('/', router).listen(PORT)
+  }
 });

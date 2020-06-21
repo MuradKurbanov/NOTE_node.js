@@ -1,4 +1,4 @@
-# programming-memo_server
+# programming-memo_back-end
 
 local start node: nodemon or yarn start
 

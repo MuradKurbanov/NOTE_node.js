@@ -1,17 +1,15 @@
 const express = require('express');
+const cors = require('cors');
 
 const db = require('./app/db');
 const router = require('./app/routes/routes');
-const dbUrl = require('./dbUrl');
 
 const PORT = process.env.PORT || 4000;
 
 const app = express();
+app.use(cors());
 
-db.connect(dbUrl, err => {
+db.connect('mongodb://localhost:27017', err => {
   if (err) console.log(err);
-  else {
-    console.log('test_commit');
-    app.use('/', router).listen(PORT)
-  }
+  else app.use('/', router).listen(PORT);
 });

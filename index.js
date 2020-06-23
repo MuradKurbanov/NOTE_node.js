@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(cors());
 
+// For local use, need run mongod
 db.connect('mongodb://localhost:27017', err => {
   if (err) console.log(err);
   else app.use('/', router).listen(PORT);

@@ -1,10 +1,12 @@
 const ThemesController = require('../models/themesModel');
 const ObjectID = require('mongodb').ObjectID;
+const CacheControl = require('../constants');
 
 // Create new theme
 exports.create = (req, res) => {
   const { name, description, example } = req.body;
   const { idTechnology, nameTechnology } = req.body.technology;
+  res.set(CacheControl);
   ThemesController.create({
     name, description, example,
     technology: { idTechnology, nameTechnology },
@@ -15,7 +17,7 @@ exports.create = (req, res) => {
 // Read - find all or by idTechnology
 exports.find = (req, res) => {
   const { id } = req.params;
-  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set(CacheControl);
   ThemesController.find(id ? {'technology.idTechnology': id } : {}, res)
 };
 
@@ -23,12 +25,14 @@ exports.find = (req, res) => {
 exports.update = (req, res) => {
   const { name, description, example, subThemes } = req.body;
   const { id } = req.params;
+  res.set(CacheControl);
   ThemesController.update({ '_id': ObjectID(id) }, {name, description, example, subThemes}, res)
 };
 
 // Delete by id theme
 exports.delete = (req, res) => {
   const { id } = req.params;
+  res.set(CacheControl);
   ThemesController.delete({ '_id': ObjectID(id) }, res);
 };
 

@@ -1,28 +1,32 @@
 const TechnologiesController = require('../models/technologiesModel');
 const ObjectID = require('mongodb').ObjectID;
+const CacheControl = require('../constants');
 
 // Creat
 exports.create = (req, res) => {
-  const { name, description } = req.body;
-  TechnologiesController.create({ name, description }, res)
+  const { name, description, sources } = req.body;
+  res.set(CacheControl);
+  TechnologiesController.create({ name, description, sources }, res)
 };
 
 // Read
 exports.find = (req, res) => {
   const { id } = req.params;
-  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.set(CacheControl);
   TechnologiesController.find(id ? {'_id': ObjectID(id) } : {}, res)
 };
 
 // Update
 exports.update = (req, res) => {
-  const { name, description } = req.body;
+  const { name, description, sources } = req.body;
   const { id } = req.params;
-  TechnologiesController.update({ '_id': ObjectID(id) }, {name, description}, res)
+  res.set(CacheControl);
+  TechnologiesController.update({ '_id': ObjectID(id) }, {name, description, sources}, res)
 };
 
 //Delete
 exports.delete = (req, res) => {
   const { id } = req.params;
+  res.set(CacheControl);
   TechnologiesController.delete({'_id': ObjectID(id)}, res)
 };

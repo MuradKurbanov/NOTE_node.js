@@ -1,10 +1,7 @@
 const db = require('../db');
 
 const checkResponse = (res, err, data) => {
-  if (err) {
-    console.log(err);
-    return res.sendStatus(500);
-  }
+  if (err) res.sendStatus(500);
   else res.send(data)
 };
 

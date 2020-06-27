@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const technologiesController = require('../controllers/technologiesController');
-const themesController = require('../controllers/themesController');
+const topicsController = require('../controllers/topicsController');
 
 const router = express.Router();
 
@@ -22,13 +22,14 @@ router.put('/technologies/:id', technologiesController.update);
 
 router.delete('/technologies/:id', technologiesController.delete);
 
-// Themes
-router.get('/themes', themesController.find);
+// Topics
+router.get('/topics', topicsController.find);
 
-router.get('/themes/:id', themesController.find);
+router.get('/topics/:id', topicsController.find);
 
-router.post('/themes', themesController.create);
+router.post('/topics', topicsController.create);
 
-router.put('/themes/:id', themesController.update);
+router.put('/topics/:id', topicsController.update);
 
-router.delete('/themes/:id', themesController.delete);
+router.delete('/topics/:id', topicsController.delete);
+

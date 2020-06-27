@@ -1,4 +1,4 @@
-const ThemesController = require('../models/themesModel');
+const TopicsController = require('../models/topicsModel');
 const ObjectID = require('mongodb').ObjectID;
 const CacheControl = require('../constants');
 
@@ -7,7 +7,7 @@ exports.create = (req, res) => {
   const { name, description, example } = req.body;
   const { idTechnology, nameTechnology } = req.body.technology;
   res.set(CacheControl);
-  ThemesController.create({
+  TopicsController.create({
     name, description, example,
     technology: { idTechnology, nameTechnology },
     subThemes: req.body.subThemes
@@ -18,7 +18,7 @@ exports.create = (req, res) => {
 exports.find = (req, res) => {
   const { id } = req.params;
   res.set(CacheControl);
-  ThemesController.find(id ? {'technology.idTechnology': id } : {}, res)
+  TopicsController.find(id ? {'technology.idTechnology': id } : {}, res)
 };
 
 // Update by id theme
@@ -26,13 +26,13 @@ exports.update = (req, res) => {
   const { name, description, example, subThemes } = req.body;
   const { id } = req.params;
   res.set(CacheControl);
-  ThemesController.update({ '_id': ObjectID(id) }, {name, description, example, subThemes}, res)
+  TopicsController.update({ '_id': ObjectID(id) }, {name, description, example, subThemes}, res)
 };
 
 // Delete by id theme
 exports.delete = (req, res) => {
   const { id } = req.params;
   res.set(CacheControl);
-  ThemesController.delete({ '_id': ObjectID(id) }, res);
+  TopicsController.delete({ '_id': ObjectID(id) }, res);
 };
 

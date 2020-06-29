@@ -6,7 +6,6 @@ const CacheControl = require('../constants');
 exports.create = (req, res) => {
   const { name, description, example } = req.body;
   const { idTechnology, nameTechnology } = req.body.technology;
-  res.set(CacheControl);
   TopicsController.create({
     name, description, example,
     technology: { idTechnology, nameTechnology },
@@ -25,14 +24,12 @@ exports.find = (req, res) => {
 exports.update = (req, res) => {
   const { name, description, example, subThemes } = req.body;
   const { id } = req.params;
-  res.set(CacheControl);
   TopicsController.update({ '_id': ObjectID(id) }, {name, description, example, subThemes}, res)
 };
 
 // Delete by id theme
 exports.delete = (req, res) => {
   const { id } = req.params;
-  res.set(CacheControl);
   TopicsController.delete({ '_id': ObjectID(id) }, res);
 };
 

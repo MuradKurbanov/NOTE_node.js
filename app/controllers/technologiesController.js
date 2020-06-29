@@ -5,7 +5,6 @@ const CacheControl = require('../constants');
 // Creat
 exports.create = (req, res) => {
   const { name, description, sources } = req.body;
-  res.set(CacheControl);
   TechnologiesController.create({ name, description, sources }, res)
 };
 
@@ -20,13 +19,11 @@ exports.find = (req, res) => {
 exports.update = (req, res) => {
   const { name, description, sources } = req.body;
   const { id } = req.params;
-  res.set(CacheControl);
   TechnologiesController.update({ '_id': ObjectID(id) }, {name, description, sources}, res)
 };
 
 //Delete
 exports.delete = (req, res) => {
   const { id } = req.params;
-  res.set(CacheControl);
   TechnologiesController.delete({'_id': ObjectID(id)}, res)
 };

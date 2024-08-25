@@ -1,4 +1,4 @@
-# NOTE node.js
+# the Note
 
 local start node: nodemon or yarn start
 
